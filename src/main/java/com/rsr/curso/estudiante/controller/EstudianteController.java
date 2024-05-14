@@ -24,6 +24,7 @@ public class EstudianteController {
 		return "index"; // nos retorna el archivo html que creamos previamente
 	}
 
+	// nuevo estudiante
 	@GetMapping({ "/estudiante/nuevo" })
 	public String formularioEstudiante(Model modelo) {
 		Estudiante estudiante = new Estudiante();
@@ -31,6 +32,7 @@ public class EstudianteController {
 		return "crear_estudiante";
 	}
 
+	// regresa al inicio
 	@PostMapping({ "/estudiante" })
 	public String guardarEstudiante(@ModelAttribute("estudiante") Estudiante estudiante) {
 		estudianteServ.guardarEstudiante(estudiante);
@@ -38,12 +40,14 @@ public class EstudianteController {
 		return "redirect:/";
 	}
 
+	// editar estudiante
 	@GetMapping("/estudiante/editar/{id}")
 	public String mostrarFromularioDeEditar(@PathVariable Long id, Model modelo) {
 		modelo.addAttribute("estudiante", estudianteServ.ObtenerEstudiantePorId(id));
 		return "editar_estudiante";
 	}
 
+	// edita el estudiante con ese id
 	@PostMapping("/estudiante/{id}")
 	public String actualizarEstudiante(@PathVariable Long id, @ModelAttribute("estudiante") Estudiante estudiante,
 			Model modelo) {
@@ -56,6 +60,7 @@ public class EstudianteController {
 		return "redirect:/";
 	}
 
+	// elimina el estudiante
 	@GetMapping("/estudiante/{id}")
 	public String eliminarEstudiante(@PathVariable Long id) {
 		estudianteServ.elimninarEstudiante(id);
